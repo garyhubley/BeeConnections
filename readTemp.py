@@ -1,8 +1,8 @@
 import os
 import time
 import datetime
-#import paho.mqtt.publish as publish
-import paho.mqtt as mqtt
+import paho.mqtt.publish as publish
+import paho.mqtt.client as mqtt
 
 #os.system('modprobe w1-gpio')
 #os.system('modprobe w1-therm')
@@ -36,8 +36,6 @@ def read_temp():
 	return st + " " + str(temp_c)
 
 while True:
-    temp = read_temp()
-    print temp
-    mqtt.publish.single( "beaglebone/corys_hive_1/temp", temp, hostname="iot.eclipse.org", protocol=mqtt.MQTTv31 )
+    publish.single( "beaglebone/corys_hive_1/temp", read_temp(), hostname="beeconnections.com", protocol=mqtt.MQTTv31 )
     
-    time.sleep(1)
+    time.sleep(300)
